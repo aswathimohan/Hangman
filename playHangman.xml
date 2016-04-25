@@ -1,3 +1,6 @@
 <?xml version="1.0"?><!--This document contains the player details that have been created.--><HangmanPlayers>
-<LogPlayer><timeTaken>00:11</timeTaken><correctWord>METHANE</correctWord><userAnswer>&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:05</timeTaken><correctWord>GAS</correctWord><userAnswer>&#x0;&#x0;&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:14</timeTaken><correctWord>LOSINGTHELAKE</correctWord><userAnswer>LOSINGTHELAKE</userAnswer><hintsUsed>True</hintsUsed><userScore>5</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:08</timeTaken><correctWord>WEATHER</correctWord><userAnswer>&#x0;&#x0;&#x0;T&#x0;&#x0;R</userAnswer><hintsUsed>True</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:27</timeTaken><correctWord>VOLCANICERUPTIONS</correctWord><userAnswer>VOLCANICERUPTIONS</userAnswer><hintsUsed>True</hintsUsed><userScore>5</userScore></LogPlayer>
 </HangmanPlayers>
