@@ -9,22 +9,27 @@ public class GameController : MonoBehaviour {
 	public Text lettesIndicator;
 	public Text statusIndicator;
 	public Text timeIndicator;
+    public Text hintText;
 	
 	
 	public HangmanController hangman;
 	private string word;
+    private string hint;
 	private char[] revealed;
 	private int score;
 	private bool completed;
 	private bool finalStatus;
 	private float initialTime;
-	
-	
+    private XMLLogWriter logWriter;
+    private bool hintUsed;
+
 	// Use this for initialization
 	void Start () {
 	
 		hangman = GameObject.FindGameObjectWithTag("Player").GetComponent<HangmanController>();
 		reset();
+        logWriter = new XMLLogWriter();
+        logWriter.setFileName("playHangman.xml");
 	}
 
 	// Update is called once per frame
@@ -66,7 +71,15 @@ public class GameController : MonoBehaviour {
 	
 	
 public void updateGameStatus(bool finalStatus){
-		
+
+        LogPlayer player = new LogPlayer();
+        player.correctWord = this.word;
+        player.hintsUsed = this.hintUsed;
+        string userAnswer = new string(revealed);
+        player.userAnswer = userAnswer;
+        player.userScore = 0;
+        player.timeTaken = timeIndicator.text;
+
 			if(finalStatus){
 				statusIndicator.text = "You won! \n Please press any key";
 				statusIndicator.color = Color.green; 
@@ -75,8 +88,8 @@ public void updateGameStatus(bool finalStatus){
 				statusIndicator.text = "You Lost! \n Please press any key";
 				statusIndicator.color = Color.red;
 			}
-	
-	
+
+        logWriter.log(player);
 	}
 	
 	/*		
@@ -139,11 +152,27 @@ public void updateGameStatus(bool finalStatus){
 	public void next(){
 		hangman.reset();
 		completed = false;
-		setword(Dictionary.instance.next(0));
+        hintUsed = false;
+        hintText.gameObject.SetActive(false);
+        setword(Dictionary.instance.next(0));
 		statusIndicator.text = "";
 		initialTime = Time.time;
 	}
 	
+    public void enableHint()
+    {
+
+
+        hintText.gameObject.SetActive(!hintText.gameObject.active);
+        hintText.text = this.hint;
+
+        if (!hintUsed)
+        {
+            hintUsed = hintText.gameObject.active;
+        }
+    }
+
+
 	private void updatewordIndicator(){
 	
 		string displayed = "";
@@ -169,9 +198,12 @@ public void updateGameStatus(bool finalStatus){
 	}
 	
 	
-	private void setword(string word){
-		word = word.ToUpper();
+	private void setword(ClimateWord climateWord)
+    {
+        string word = climateWord.word;
+        word = word.ToUpper();
 		this.word = word;
+        this.hint = climateWord.meaning;
 		revealed = new char[word.Length];
 		lettesIndicator.text = "Letters: " + word.Length;
 	

@@ -4,11 +4,19 @@ using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ClimateWord {
+
+	public string word;
+	public string meaning;
+
+}
+
+
 public class Dictionary  {
 
 	private static Dictionary s_instance;
-	private string[] words;
-	
+	private ClimateWord[] words;	
+
 	
 	public static Dictionary instance {
 		
@@ -16,7 +24,7 @@ public class Dictionary  {
 	
 	}
 	
-	private Dictionary (string[] words){
+	private Dictionary (ClimateWord[] words){
 	
 		this.words = words;
 	
@@ -48,21 +56,37 @@ public class Dictionary  {
 			}
 	
 	
-		HashSet<string> wordList = new HashSet<string> ();
+		HashSet<ClimateWord> wordList = new HashSet<ClimateWord> ();
 		//loading word list
 		TextAsset asset = Resources.Load ("words") as TextAsset;
 		TextReader src = new StringReader(asset.text);
 		//reading lines
 		while(src.Peek() != -1){
-			string word = src.ReadLine();
+			string fullword = src.ReadLine();
+			int equalPos = fullword.IndexOf ("=");
+
+			string word = fullword;
+			string description = "";
+			if (equalPos > 0) {
+				word = fullword.Substring (0, equalPos);
+				word = word.Replace(" ", "");
+				 description = fullword.Substring (equalPos + 1);
+			}
+
 			if(isWordOK(word)){
-				wordList.Add(word);
+				//wordList.Add(word);
+
+				ClimateWord newWord = new ClimateWord ();
+				newWord.word = word;
+				newWord.meaning = description.Trim();
+				wordList.Add (newWord);
+
 			}
 		}
 		//unloading assets
 		Resources.UnloadAsset(asset);
 		//setup dict
-		string[] words = new string[wordList.Count];
+		ClimateWord[] words = new ClimateWord[wordList.Count];
 		wordList.CopyTo (words);
 		s_instance = new Dictionary(words);
 		
@@ -70,7 +94,12 @@ public class Dictionary  {
 	}
 
 
-	public string next(int limit){
+	public int totalWords(){
+
+		return this.words.Length;
+	}
+
+	public ClimateWord next(int limit){
 		int index = (int) (Random.value * (words.Length-1));
 		return words[index];
 	}

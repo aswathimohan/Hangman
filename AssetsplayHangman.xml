@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LogPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <timeTaken>00:12</timeTaken>
+  <correctWord>PRECIPITATION</correctWord>
+  <userAnswer>&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;</userAnswer>
+  <hintsUsed>true</hintsUsed>
+  <userScore>0</userScore>
+</LogPlayer><?xml version="1.0" encoding="Windows-1252"?>
+<LogPlayer xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <timeTaken>00:12</timeTaken>
+  <correctWord>PRECIPITATION</correctWord>
+  <userAnswer>&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;</userAnswer>
+  <hintsUsed>true</hintsUsed>
+  <userScore>0</userScore>
+</LogPlayer>
