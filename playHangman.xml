@@ -1,3 +1,7 @@
 <?xml version="1.0"?><!--This document contains the player details that have been created.--><HangmanPlayers>
-<LogPlayer><timeTaken>00:11</timeTaken><correctWord>METHANE</correctWord><userAnswer>&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:13</timeTaken><correctWord>GREENHOUSEEFFECT</correctWord><userAnswer>&#x0;&#x0;EE&#x0;&#x0;&#x0;&#x0;&#x0;EE&#x0;&#x0;E&#x0;T</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:05</timeTaken><correctWord>ECOTERRORISM</correctWord><userAnswer>&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;&#x0;S&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:21</timeTaken><correctWord>CLIMATECHANGE</correctWord><userAnswer>&#x0;L&#x0;MAT&#x0;&#x0;&#x0;AN&#x0;&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:23</timeTaken><correctWord>HURRICANE</correctWord><userAnswer>H&#x0;&#x0;&#x0;I&#x0;AN&#x0;</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
+<LogPlayer><timeTaken>00:11</timeTaken><correctWord>AEROSOLS</correctWord><userAnswer>AEROSOLS</userAnswer><hintsUsed>False</hintsUsed><userScore>0</userScore></LogPlayer>
 </HangmanPlayers>
