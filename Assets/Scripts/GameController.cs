@@ -22,6 +22,7 @@ public class GameController : MonoBehaviour {
 	private float initialTime;
     private XMLLogWriter logWriter;
     private bool hintUsed;
+    public int correctWordMark = 5;
 
 	// Use this for initialization
 	void Start () {
@@ -77,17 +78,19 @@ public void updateGameStatus(bool finalStatus){
         player.hintsUsed = this.hintUsed;
         string userAnswer = new string(revealed);
         player.userAnswer = userAnswer;
-        player.userScore = 0;
         player.timeTaken = timeIndicator.text;
+       
 
-			if(finalStatus){
+        if (finalStatus){
 				statusIndicator.text = "You won! \n Please press any key";
-				statusIndicator.color = Color.green; 
-			}
+				statusIndicator.color = Color.green;
+                player.userScore = correctWordMark;
+        }
 			else{
 				statusIndicator.text = "You Lost! \n Please press any key";
 				statusIndicator.color = Color.red;
-			}
+                 player.userScore = 0;
+        }
 
         logWriter.log(player);
 	}
@@ -114,14 +117,14 @@ public void updateGameStatus(bool finalStatus){
 	public bool check(char c){
 		bool ret = false;
 		int complete = 0;
-		int score = 0;
+		//int score = 0;
 		
 		for(int i = 0;i < revealed.Length;i++){
 			if(c == word[i]){
 					ret = true;
 					if(revealed[i] == 0){
 						revealed[i] = c;
-						score++;
+					//	score++;
 					}
 			}
 			
@@ -130,12 +133,13 @@ public void updateGameStatus(bool finalStatus){
 			}
 		}
 
-			//Score Mainpulation
-			if(score != 0){
-				this.score += score;
-				if(complete == revealed.Length){
-					this.completed = true;
-					this.score += revealed.Length;
+        //Score Mainpulation,if(score != 0)
+        {
+
+            if (complete == revealed.Length && this.completed == false){
+                    this.score += correctWordMark;
+                    this.completed = true;
+					//this.score += revealed.Length;
 					finalStatus = true;
 				updateGameStatus(finalStatus);
 				}
