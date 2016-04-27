@@ -23,11 +23,13 @@ public class GameController : MonoBehaviour {
     private XMLLogWriter logWriter;
     private bool hintUsed;
     public int correctWordMark = 5;
+    private ClimateWord[] playedWords;
+    private int indexPlayedWords = 0;
 
 	// Use this for initialization
 	void Start () {
-	
-		hangman = GameObject.FindGameObjectWithTag("Player").GetComponent<HangmanController>();
+        hangman = GameObject.FindGameObjectWithTag("Player").GetComponent<HangmanController>();
+        playedWords = new ClimateWord[Dictionary.instance.totalWords()];
 		reset();
         logWriter = new XMLLogWriter();
         logWriter.setFileName("playHangman.xml");
@@ -93,6 +95,18 @@ public void updateGameStatus(bool finalStatus){
         }
 
         logWriter.log(player);
+       
+        indexPlayedWords++;
+        
+
+        if(indexPlayedWords == Dictionary.instance.totalWords())
+
+        {
+            Score scoreController = gameObject.GetComponent<Score>();
+            scoreController.saveScore(this.score);
+            Application.LoadLevel("GameOver");
+        }
+
 	}
 	
 	/*		
@@ -158,11 +172,38 @@ public void updateGameStatus(bool finalStatus){
 		completed = false;
         hintUsed = false;
         hintText.gameObject.SetActive(false);
-        setword(Dictionary.instance.next(0));
+        // setword(Dictionary.instance.next(0));
+        setword(findAUniqueWord());
 		statusIndicator.text = "";
 		initialTime = Time.time;
 	}
 	
+    private ClimateWord findAUniqueWord()
+    {
+        ClimateWord uniqueWord = Dictionary.instance.next(0);
+        while(this.isPlayed(uniqueWord) == true)
+        {
+            uniqueWord = Dictionary.instance.next(0);
+        }
+
+        return uniqueWord;
+    }
+
+    private bool isPlayed(ClimateWord word)
+    {
+        for(int i = 0;i < indexPlayedWords; i++)
+        {
+            ClimateWord currentWord = playedWords[i];
+            if(currentWord.word == word.word)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+
     public void enableHint()
     {
 
@@ -204,20 +245,23 @@ public void updateGameStatus(bool finalStatus){
 	
 	private void setword(ClimateWord climateWord)
     {
+        playedWords[indexPlayedWords] = climateWord;
         string word = climateWord.word;
         word = word.ToUpper();
 		this.word = word;
         this.hint = climateWord.meaning;
 		revealed = new char[word.Length];
 		lettesIndicator.text = "Letters: " + word.Length;
-	
+        Debug.Log(word);
 		updatewordIndicator();
 	}
 	
 	
 	public void reset(){
 		score = 0;
-		updateScoreIndicator();
+        indexPlayedWords = 0;
+
+        updateScoreIndicator();
 		next();
 	}
 
